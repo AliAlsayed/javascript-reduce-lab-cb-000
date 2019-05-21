@@ -20,17 +20,17 @@ const monologueLines = [
 var batteryCounter = (total, battery) => total + battery
 var totalBatteries = batteryBatches.reduce(batteryCounter, 0)
 
-function wordConter(obj, sentence){
-  words = sentence.split(" ").length.toString()
-  if (!obj[words]){
-    obj[words] = 1
-  } else {
-    obj[words] += 1
-  }
-  return obj;
-}
+const wordCountMap = monologueLines.reduce((map, sentence) => {
+  const wordCount = sentence.split(' ').length;
 
-var wordCountMap = monologueLines.reduce(wordConter, {});
+  if (!map[wordCount]) {
+    map[wordCount] = 0;
+  }
+
+  map[wordCount]++;
+
+  return map;
+}, {});
 
 
 console.log(wordCountMap)
